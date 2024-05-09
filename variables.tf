@@ -1,7 +1,3 @@
-variable "region" {
-  description = "Deployment region"
-  default     = "us-east4"
-}
 variable "clusterName" {
   description = "Name of our Cluster"
 }
