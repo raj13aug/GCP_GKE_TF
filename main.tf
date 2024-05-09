@@ -7,7 +7,7 @@ resource "google_container_cluster" "gke_cluster" {
   location                 = var.region # Replace this with your desired region
   enable_shielded_nodes    = "true"
   remove_default_node_pool = true
-  initial_node_count       = 2
+  initial_node_count       = 1
   deletion_protection      = false
   #   disk_size_gb             = var.disk_size_gb
 
