@@ -1,10 +1,14 @@
+resource "google_project_service" "container_api" {
+  service = "container.googleapis.com"
+}
+
 resource "google_container_cluster" "gke_cluster" {
   name                     = var.clusterName
   location                 = var.region # Replace this with your desired region
   enable_shielded_nodes    = "true"
   remove_default_node_pool = true
   initial_node_count       = 1
-  disk_size_gb             = 10GB
+  #   disk_size_gb             = var.disk_size_gb
 
   release_channel {
     channel = "STABLE"
@@ -30,6 +34,9 @@ resource "google_container_cluster" "gke_cluster" {
   lifecycle {
     ignore_changes = [node_pool]
   }
+  depends_on = [
+    google_project_service.container_api
+  ]
 }
 
 resource "google_container_node_pool" "primary_nodes" {
@@ -65,4 +72,7 @@ resource "google_container_node_pool" "primary_nodes" {
       "https://www.googleapis.com/auth/monitoring",
     ]
   }
+  depends_on = [
+    google_project_service.container_api
+  ]
 }
