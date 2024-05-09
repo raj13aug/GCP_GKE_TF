@@ -7,7 +7,8 @@ resource "google_container_cluster" "gke_cluster" {
   location                 = var.region # Replace this with your desired region
   enable_shielded_nodes    = "true"
   remove_default_node_pool = true
-  initial_node_count       = 1
+  initial_node_count       = 2
+  deletion_protection      = false
   #   disk_size_gb             = var.disk_size_gb
 
   release_channel {
@@ -75,4 +76,5 @@ resource "google_container_node_pool" "primary_nodes" {
   depends_on = [
     google_project_service.container_api
   ]
+
 }
